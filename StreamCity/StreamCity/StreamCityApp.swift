@@ -2,16 +2,22 @@
 //  StreamCityApp.swift
 //  StreamCity
 //
-//  Created by Tamara Russell on 11/30/24.
+//  Created by Noah Russell on 11/30/24.
 //
 
 import SwiftUI
+import FirebaseCore // <-- Import Firebase
 
 @main
-struct StreamCityApp: App {
+struct FireChatApp: App {
+
+    init() { // <-- Add an init
+        FirebaseApp.configure() // <-- Configure Firebase app
+    }
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
     }
 }
