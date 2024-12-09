@@ -18,7 +18,7 @@ Scope: A robust app with a strong foundational feature set and potential for exp
 ## 1. User Stories
 **Required Must-have Stories:**
 
-- Users can create an account and log in.
+- Users can create an account and log in (via Firebase).
 - Users can link accounts from multiple streaming platforms (e.g., Twitch, YouTube, Facebook Gaming).
 - Users can follow streamers and receive notifications for live streams.
 - Users can view a unified feed of live streams from all linked platforms.
@@ -36,7 +36,7 @@ Scope: A robust app with a strong foundational feature set and potential for exp
 - Streamers can access a basic dashboard to track their followers and engagement stats.
 
 ## 2. Screen Archetypes
-**Login Screen**
+**Login/Signup Screen**
 Required Feature: Users can create an account or log in to access personalized content.
 
 **Home Feed**
@@ -63,7 +63,7 @@ Profile – Manage linked accounts, notification preferences, and app settings.
 
 **Flow Navigation (Screen to Screen):**
 
-##### Login Screen
+##### Login/Signup Screen
 Login Screen → Leads to Home Feed.
 ##### Home Feed
 Home Feed → Leads to Stream Viewer (when a stream is selected).
