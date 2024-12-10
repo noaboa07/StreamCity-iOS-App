@@ -13,7 +13,7 @@ struct SignUpView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var errorMessage = ""
-    @State private var isLoading = false // New state for loading indicator
+    @State private var isLoading = false // Loading indicator state
     @Binding var isLoggedIn: Bool
 
     var body: some View {
@@ -25,17 +25,21 @@ struct SignUpView: View {
                 .background(Color.gray.opacity(0.2))
                 .cornerRadius(8)
                 .accessibilityLabel("Email input field")
+                .accessibilityValue(email.isEmpty ? "Empty" : email)
 
             SecureField("Password", text: $password)
                 .padding()
                 .background(Color.gray.opacity(0.2))
                 .cornerRadius(8)
                 .accessibilityLabel("Password input field")
+                .accessibilityValue(password.isEmpty ? "Empty" : "Password entered")
 
             if !errorMessage.isEmpty {
                 Text(errorMessage)
                     .foregroundColor(.red)
                     .padding()
+                    .accessibilityLabel("Error message")
+                    .accessibilityValue(errorMessage)
             }
 
             Button(action: {
@@ -95,6 +99,7 @@ struct SignUpView: View {
             return false
         }
         
+        errorMessage = "" // Clear any previous error messages
         return true
     }
 
@@ -112,6 +117,8 @@ struct SignUpView: View {
         ]) { error in
             if let error = error {
                 print("Error adding user to Firestore: \(error.localizedDescription)")
+            } else {
+                print("User successfully added to Firestore.")
             }
         }
     }

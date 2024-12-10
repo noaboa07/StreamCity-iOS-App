@@ -22,19 +22,21 @@ struct LoginView: View {
                 .padding()
                 .keyboardType(.emailAddress)
                 .autocapitalization(.none)
+                .accessibilityLabel("Email input field")
+                .accessibilityValue(email.isEmpty ? "Empty" : email)
 
             SecureField("Password", text: $password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
                 .autocapitalization(.none)
+                .accessibilityLabel("Password input field")
+                .accessibilityValue(password.isEmpty ? "Empty" : "Password entered")
 
             Button(action: {
-                if email.isEmpty || password.isEmpty {
-                    errorMessage = "Please fill in both fields."
-                    return
+                if validateInput() {
+                    isLoading = true
+                    signIn()
                 }
-                isLoading = true
-                signIn()
             }) {
                 if isLoading {
                     ProgressView()
@@ -47,6 +49,7 @@ struct LoginView: View {
                         .foregroundColor(.white)
                         .cornerRadius(10)
                         .shadow(radius: 5)
+                        .accessibilityLabel("Log in button")
                 }
             }
             .disabled(isLoading) // Disable button when loading
@@ -55,6 +58,8 @@ struct LoginView: View {
                 Text(errorMessage)
                     .foregroundColor(.red)
                     .padding()
+                    .accessibilityLabel("Error message")
+                    .accessibilityValue(errorMessage)
             }
 
             Spacer()
@@ -66,11 +71,19 @@ struct LoginView: View {
         .navigationTitle("Log In")
     }
 
+    private func validateInput() -> Bool {
+        if email.isEmpty || password.isEmpty {
+            errorMessage = "Please fill in both fields."
+            return false
+        }
+        return true
+    }
+
     private func signIn() {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             isLoading = false
             if let error = error {
-                errorMessage = "Error: \(error.localizedDescription)"
+                handleAuthError(error)
                 return
             }
 
@@ -79,6 +92,21 @@ struct LoginView: View {
                 isLoggedIn = true // Update isLoggedIn state
             } else {
                 errorMessage = "An unknown error occurred. Please try again."
+            }
+        }
+    }
+
+    private func handleAuthError(_ error: Error) {
+        if let authError = error as NSError? {
+            switch authError.code {
+            case AuthErrorCode.wrongPassword.rawValue:
+                errorMessage = "Incorrect password. Please try again."
+            case AuthErrorCode.userNotFound.rawValue:
+                errorMessage = "No account found with this email."
+            case AuthErrorCode.invalidEmail.rawValue:
+                errorMessage = "Invalid email format."
+            default:
+                errorMessage = "Error: \(error.localizedDescription)"
             }
         }
     }

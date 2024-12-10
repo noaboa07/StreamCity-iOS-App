@@ -16,33 +16,24 @@ struct SearchView: View {
             VStack {
                 // Search Bar
                 SearchBar(text: $searchQuery)
-                    .padding()
-
+                    .padding(.horizontal)
+                
                 // Filtered List of Streams
-                List(filteredStreams) { stream in
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(stream.streamerName)
-                            .font(.headline)
-                            .foregroundColor(.blue)
-                        Text(stream.title)
-                            .font(.body)
-                            .foregroundColor(.gray)
-                        AsyncImage(url: URL(string: stream.thumbnailURL)) { image in
-                            image.resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 70)
-                        } placeholder: {
-                            ProgressView()
+                ScrollView {
+                    LazyVStack(spacing: 16) {
+                        ForEach(filteredStreams) { stream in
+                            NavigationLink(destination: StreamDetailView(stream: stream)) {
+                                StreamCardView(stream: stream)
+                                    .padding(.horizontal)
+                            }
                         }
                     }
-                    .padding(.vertical, 5)
                 }
-                .navigationTitle("Search")
-            }
-            // Updated onChange modifier for iOS 17+
-            .onChange(of: searchQuery) { _, newQuery in
-                // Filter streams based on search query
-                filterStreams(query: newQuery)
+                .navigationTitle("Search Streams")
+                .onChange(of: searchQuery) { _, newQuery in
+                    // Filter streams based on search query
+                    filterStreams(query: newQuery)
+                }
             }
         }
     }
@@ -56,5 +47,65 @@ struct SearchView: View {
                 $0.title.lowercased().contains(query.lowercased())
             }
         }
+    }
+}
+
+struct StreamCardView: View {
+    let stream: Stream
+    
+    var body: some View {
+        HStack(spacing: 12) {
+            // Stream Thumbnail
+            AsyncImage(url: URL(string: stream.thumbnailURL)) { phase in
+                switch phase {
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 100, height: 70)
+                        .cornerRadius(8)
+                        .clipped()
+                        .accessibilityLabel("Thumbnail of the stream titled \(stream.title)")
+                case .failure:
+                    Color.red
+                        .frame(width: 100, height: 70)
+                        .cornerRadius(8)
+                        .accessibilityLabel("Failed to load thumbnail for \(stream.title)")
+                case .empty:
+                    ProgressView()
+                        .frame(width: 100, height: 70)
+                        .accessibilityLabel("Loading thumbnail for \(stream.title)")
+                @unknown default:
+                    Color.gray
+                        .frame(width: 100, height: 70)
+                        .cornerRadius(8)
+                }
+            }
+            
+            // Stream Information
+            VStack(alignment: .leading, spacing: 4) {
+                Text(stream.streamerName)
+                    .font(.headline)
+                    .foregroundColor(.primary)
+                    .accessibilityLabel("Streamer: \(stream.streamerName)")
+                
+                Text(stream.title)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .accessibilityLabel("Stream title: \(stream.title)")
+            }
+            Spacer()
+        }
+        .padding()
+        .background(Color(UIColor.systemBackground))
+        .cornerRadius(12)
+        .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
+    }
+}
+
+struct SearchView_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchView()
+            .previewLayout(.sizeThatFits)
     }
 }

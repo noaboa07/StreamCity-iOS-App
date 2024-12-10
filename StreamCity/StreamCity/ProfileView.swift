@@ -7,74 +7,129 @@
 
 import SwiftUI
 import FirebaseAuth
+import FirebaseFirestore
 
 struct ProfileView: View {
-    // Mock user profile data
-    @State private var username: String = "ProGamer123"
-    @State private var profileImage: String = "https://via.placeholder.com/150" // Placeholder image
+    @State private var username: String = "Loading..."
+    @State private var profileImage: String = "https://via.placeholder.com/150"
     @State private var followedStreamers: [String] = ["ArtLover", "MusicFanatic"]
-    @Binding var isLoggedIn: Bool // Bind this from the parent view to manage login state
+    @State private var isLoading: Bool = true
+    @State private var hasError: Bool = false
+    @Binding var isLoggedIn: Bool
+    @State private var showLogoutConfirmation = false
 
     var body: some View {
         NavigationView {
             VStack {
-                // Profile Image and Username
-                VStack {
-                    AsyncImage(url: URL(string: profileImage)) { image in
-                        image.resizable()
-                            .scaledToFill()
-                            .frame(width: 150, height: 150)
-                            .clipShape(Circle())
-                            .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                            .shadow(radius: 10)
-                    } placeholder: {
-                        ProgressView()
-                    }
-                    
-                    Text(username)
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .padding(.top, 10)
-                }
-                .padding()
-
-                // Followed Streamers List
-                VStack(alignment: .leading) {
-                    Text("Followed Streamers")
-                        .font(.headline)
-                        .padding(.top)
-                    
-                    List(followedStreamers, id: \.self) { streamer in
-                        Text(streamer)
-                            .font(.body)
-                            .foregroundColor(.blue)
-                    }
-                }
-                .padding(.horizontal)
-
-                // Edit Profile Button
-                Button(action: {
-                    // Action to edit profile (future feature)
-                    print("Edit Profile")
-                }) {
-                    Text("Edit Profile")
-                        .font(.headline)
-                        .foregroundColor(.blue)
+                if isLoading {
+                    ProgressView("Loading...")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .padding()
-                        .background(RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 2))
+                } else {
+                    VStack {
+                        AsyncImage(url: URL(string: profileImage)) { image in
+                            image.resizable()
+                                .scaledToFill()
+                                .frame(width: 150, height: 150)
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                                .shadow(radius: 10)
+                        } placeholder: {
+                            ProgressView()
+                                .frame(width: 150, height: 150)
+                                .background(Color.gray.opacity(0.3))
+                                .clipShape(Circle())
+                        }
+                        
+                        Text(username)
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .padding(.top, 10)
+                    }
+                    .padding()
+
+                    VStack(alignment: .leading) {
+                        Text("Followed Streamers")
+                            .font(.headline)
+                            .padding(.top)
+                        
+                        ScrollView {
+                            VStack(alignment: .leading) {
+                                ForEach(followedStreamers, id: \.self) { streamer in
+                                    Button(action: {
+                                        print("Tapped on \(streamer)")
+                                    }) {
+                                        Text(streamer)
+                                            .font(.body)
+                                            .foregroundColor(.blue)
+                                            .padding(.vertical, 2)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                    }
+                                    .buttonStyle(PlainButtonStyle())
+                                }
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
+
+                    NavigationLink(destination: ProfileEditView(username: $username, profileImage: $profileImage)) {
+                        Text("Edit Profile")
+                            .font(.headline)
+                            .foregroundColor(.blue)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 2))
+                    }
+                    .padding(.top)
+
+                    Spacer()
                 }
-                .padding(.top)
             }
             .navigationTitle("Profile")
+            .onAppear(perform: loadProfileData)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        logout()
+                        showLogoutConfirmation = true
                     }) {
                         Text("Logout")
                             .foregroundColor(.red)
                     }
+                    .alert(isPresented: $showLogoutConfirmation) {
+                        Alert(
+                            title: Text("Logout"),
+                            message: Text("Are you sure you want to log out?"),
+                            primaryButton: .destructive(Text("Logout")) {
+                                logout()
+                            },
+                            secondaryButton: .cancel()
+                        )
+                    }
                 }
+            }
+        }
+        .alert(isPresented: $hasError) {
+            Alert(title: Text("Error"), message: Text("There was an issue loading your profile. Please try again later."), dismissButton: .default(Text("OK")))
+        }
+    }
+
+    private func loadProfileData() {
+        guard let user = Auth.auth().currentUser else {
+            isLoading = false
+            return
+        }
+        let db = Firestore.firestore()
+        let userRef = db.collection("users").document(user.uid)
+
+        userRef.getDocument { document, error in
+            if let document = document, document.exists {
+                let data = document.data() ?? [:]
+                username = data["username"] as? String ?? "Unknown User"
+                profileImage = data["profileImage"] as? String ?? "https://via.placeholder.com/150"
+                isLoading = false
+            } else {
+                print("Error fetching user data: \(error?.localizedDescription ?? "Unknown error")")
+                hasError = true
+                isLoading = false
             }
         }
     }
@@ -82,15 +137,9 @@ struct ProfileView: View {
     private func logout() {
         do {
             try Auth.auth().signOut()
-            isLoggedIn = false // Update the login state
+            isLoggedIn = false
         } catch {
             print("Error signing out: \(error.localizedDescription)")
         }
-    }
-}
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView(isLoggedIn: .constant(true))
     }
 }

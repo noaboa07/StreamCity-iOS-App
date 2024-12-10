@@ -16,27 +16,34 @@ struct MainTabView: View {
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
+                .accessibilityLabel("Home Tab")
             
             SearchView()
                 .tabItem {
                     Label("Search", systemImage: "magnifyingglass")
                 }
+                .accessibilityLabel("Search Tab")
             
             CommunityView()
                 .tabItem {
                     Label("Community", systemImage: "person.3.fill")
                 }
+                .accessibilityLabel("Community Tab")
             
             ProfileView(isLoggedIn: $isLoggedIn) // Pass the binding here
                 .tabItem {
                     Label("Profile", systemImage: "person.circle")
                 }
+                .accessibilityLabel("Profile Tab")
         }
+        .accentColor(.blue) // Custom color for the tab bar items
     }
 }
 
 struct MainTabView_Previews: PreviewProvider {
     static var previews: some View {
         MainTabView(isLoggedIn: .constant(true)) // Preview with a dummy binding
+            .previewLayout(.sizeThatFits)
+            .padding()
     }
 }

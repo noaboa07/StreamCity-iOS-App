@@ -9,20 +9,22 @@ import SwiftUI
 import FirebaseAuth
 
 struct MainView: View {
-    @State private var isLoggedIn = false // Use non-optional Bool to track authentication state
+    @State private var isLoggedIn = false // Non-optional Bool to track authentication state
     @State private var authStateListenerHandle: AuthStateDidChangeListenerHandle?
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 if isLoggedIn {
                     // Pass the isLoggedIn state directly to ContentView
                     ContentView(isLoggedIn: $isLoggedIn)
                         .transition(.opacity)
+                        .accessibilityLabel("Logged in content view")
                 } else {
                     // Pass the binding to a false value for LoginView
                     LoginView(isLoggedIn: $isLoggedIn)
                         .transition(.opacity)
+                        .accessibilityLabel("Login view")
                 }
             }
             .onAppear {
@@ -37,7 +39,7 @@ struct MainView: View {
                     Auth.auth().removeStateDidChangeListener(handle)
                 }
             }
+            .animation(.default, value: isLoggedIn) // Apply animation only when isLoggedIn changes
         }
-        .animation(.default, value: isLoggedIn)
     }
 }

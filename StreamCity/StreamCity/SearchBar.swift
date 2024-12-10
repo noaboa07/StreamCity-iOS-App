@@ -25,5 +25,15 @@ struct SearchBar: View {
         .background(Color(.systemGray6))
         .cornerRadius(8)
         .padding(.horizontal)
+        .accessibilityLabel("Search bar")
+        .accessibilityHint("Type a keyword to search streams")
+    }
+}
+
+struct SearchBar_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchBar(text: .constant(""))
+            .previewLayout(.sizeThatFits)
+            .padding()
     }
 }

@@ -24,6 +24,9 @@
 		A3BCCA912D07ABDA00F2FDDF /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BCCA902D07ABDA00F2FDDF /* CommunityView.swift */; };
 		A3BCCA932D07ABEC00F2FDDF /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BCCA922D07ABEC00F2FDDF /* Posts.swift */; };
 		A3BCCA952D07AC1400F2FDDF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BCCA942D07AC1400F2FDDF /* ProfileView.swift */; };
+		A3BCCA972D07E3F000F2FDDF /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BCCA962D07E3F000F2FDDF /* ProfileEditView.swift */; };
+		A3BCCA992D07E80E00F2FDDF /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BCCA982D07E80E00F2FDDF /* PhotoPicker.swift */; };
+		A3BCCAA12D08047500F2FDDF /* TwitchNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BCCAA02D08047500F2FDDF /* TwitchNetworkManager.swift */; };
 		A3EE19312CFBBBC200DE3544 /* StreamCityApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EE19302CFBBBC200DE3544 /* StreamCityApp.swift */; };
 		A3EE19332CFBBBC200DE3544 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EE19322CFBBBC200DE3544 /* ContentView.swift */; };
 		A3EE19352CFBBBC500DE3544 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3EE19342CFBBBC500DE3544 /* Assets.xcassets */; };
@@ -46,6 +49,9 @@
 		A3BCCA902D07ABDA00F2FDDF /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
 		A3BCCA922D07ABEC00F2FDDF /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		A3BCCA942D07AC1400F2FDDF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		A3BCCA962D07E3F000F2FDDF /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
+		A3BCCA982D07E80E00F2FDDF /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
+		A3BCCAA02D08047500F2FDDF /* TwitchNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchNetworkManager.swift; sourceTree = "<group>"; };
 		A3EE192D2CFBBBC200DE3544 /* StreamCity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StreamCity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3EE19302CFBBBC200DE3544 /* StreamCityApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamCityApp.swift; sourceTree = "<group>"; };
 		A3EE19322CFBBBC200DE3544 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -114,6 +120,9 @@
 				A3BCCA8E2D07ABB400F2FDDF /* StreamDetailView.swift */,
 				A3BCCA902D07ABDA00F2FDDF /* CommunityView.swift */,
 				A3BCCA942D07AC1400F2FDDF /* ProfileView.swift */,
+				A3BCCA962D07E3F000F2FDDF /* ProfileEditView.swift */,
+				A3BCCA982D07E80E00F2FDDF /* PhotoPicker.swift */,
+				A3BCCAA02D08047500F2FDDF /* TwitchNetworkManager.swift */,
 			);
 			path = StreamCity;
 			sourceTree = "<group>";
@@ -204,7 +213,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3BCCA972D07E3F000F2FDDF /* ProfileEditView.swift in Sources */,
 				A3BCCA912D07ABDA00F2FDDF /* CommunityView.swift in Sources */,
+				A3BCCA992D07E80E00F2FDDF /* PhotoPicker.swift in Sources */,
 				A3BCCA862D07AADC00F2FDDF /* HomeView.swift in Sources */,
 				A3EE19332CFBBBC200DE3544 /* ContentView.swift in Sources */,
 				A3BCCA722D079B3600F2FDDF /* SignUpView.swift in Sources */,
@@ -217,6 +228,7 @@
 				A3BCCA762D079BFD00F2FDDF /* MainView.swift in Sources */,
 				A3EE19312CFBBBC200DE3544 /* StreamCityApp.swift in Sources */,
 				A3BCCA8F2D07ABB400F2FDDF /* StreamDetailView.swift in Sources */,
+				A3BCCAA12D08047500F2FDDF /* TwitchNetworkManager.swift in Sources */,
 				A3BCCA7A2D07A37600F2FDDF /* AccountLinkingView.swift in Sources */,
 				A3BCCA892D07AB3200F2FDDF /* Streams.swift in Sources */,
 				A3BCCA8B2D07AB6B00F2FDDF /* SearchView.swift in Sources */,
