@@ -25,6 +25,7 @@ Scope: A robust app with a strong foundational feature set and potential for exp
 - [] Users can click on a stream to be redirected to the original streaming platform to watch.
 - [✅︎] Users can chat within streams (if supported by the platform).
 - [✅︎] Users can customize profile settings including their avatar, profile name, etc.
+- [] Users can access a settings page to change for a better user friendly enviornment (e.g dark mode)
 
 **Optional Nice-to-have Stories:**
 
@@ -49,7 +50,7 @@ Required Feature: Users can watch a stream on its original platform and interact
 Required Feature: Users can search for streamers, games, or categories to find content of interest.
 
 **Settings Screen**
-Required Feature: Users can manage their linked accounts, adjust notification preferences, and customize app settings.
+Required Feature: Users can adjust notification preferences and customize app settings.
 
 ## 3. Navigation
 
@@ -58,7 +59,7 @@ Required Feature: Users can manage their linked accounts, adjust notification pr
 Home – A feed displaying live streams from all linked platforms.
 Search – Search for streamers, games, or specific content.
 Community – Access trending streams, engage in discussions, and share content.
-Profile – Manage linked accounts, notification preferences, and app settings.
+Profile – Manage personal account, notification preferences, and app settings.
 
 
 **Flow Navigation (Screen to Screen):**
@@ -77,8 +78,7 @@ Settings Screen → Accessible from any tab, allowing users to manage their acco
 
 ## 4. How It Works
 
-* Account Creation & Login: Users sign up or log in to personalize their experience and manage linked streaming accounts.
-* Link Accounts: Connect multiple streaming platform accounts (e.g., Twitch, YouTube Live, Facebook Gaming) to create a unified view of available content.
+* Account Creation & Login: Users sign up or log in to personalize their experience
 * Browse the Feed: The Home Feed shows live streams from all linked platforms in one place, displaying stream previews, game titles, and streamers.
 * Search & Discover: Users can search for specific streamers, games, or categories to find live content they love.
 * Watch & Redirect: Clicking on a stream redirects users to the original platform to watch the stream in its native interface.
