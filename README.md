@@ -18,10 +18,10 @@ Scope: A robust app with a strong foundational feature set and potential for exp
 ## 1. User Stories
 **Required Must-have Stories:**
 
-- [✅︎] Users can create an account and/or log in (via FireAuth).
+- [✅︎] Users can create an account and/or log in (via FireAuth + FireStore).
 - [✅︎] Users can search through a large vareity of different streams from platforms affiliated with StreamCity.
 - [✅︎] Users can follow streamers on StreamCity and receive notifications for live streams.
-- [✅︎] Users can view a unified feed of recommended (and followed streamers) live streams from all affiliated platforms.
+- [✅︎] Users can view a unified feed of recommended (and followed streamers) live streams from all affiliated platforms from the Home Page.
 - [✅︎] Users can click on a stream to be redirected to the original streaming platform to watch.
 - [✅︎] Users can chat within streams (if supported by the platform).
 - [✅︎] Users can customize profile settings including their avatar, profile name, etc.
@@ -30,12 +30,12 @@ Scope: A robust app with a strong foundational feature set and potential for exp
 
 **Optional Nice-to-have Stories:**
 
-- [✅︎] Users can view trending streams and recommended content.
-- [] Users can use a multi-stream view to watch multiple streams at once.
-- [] Users post clips and saveed highlights from live streams on the community page.
+- [✅︎] Users can view detailed information about streams and recommended content (e.g Viewer Coumt).
+- [] Users can send friend requests with one another and share content to each other
+- [] Users post clips and saved highlights from live streams on the community page (perhaps share with friends?)
 - [✅︎] Users can engage in a community hub for discussing streams and sharing content.
-- [] Users can link their platform accounts to StreamCity.
-- [] Users can access other users profiles via the Community board
+- [] Users can link their platform accounts to StreamCity (Twitch, YouTube, TikTok, etc.).
+- [] Users can access other users profiles via the Community Board to view linked accounts and followed streamers.
 - [] Streamers can access a basic dashboard to track their followers and engagement stats.
 
 ## 2. Screen Archetypes
@@ -46,13 +46,17 @@ Required Feature: Users can create an account or log in to access personalized c
 Required Feature: Users can view a feed of live streams from all linked platforms, showing thumbnails and basic stream information.
 
 **Stream Viewer**
-Required Feature: Users can watch a stream on its original platform and interact via platform-integrated chat.
+Required Feature: Users can be redirected from a selected livestream to watch a stream on its original platform and interact via platform-integrated chat.
 
 **Search Screen**
-Required Feature: Users can search for streamers, games, or categories to find content of interest.
+Required Feature: Users can search for streamers, games, or from various categories to find content of interest.
 
 **Settings Screen**
 Required Feature: Users can adjust notification preferences and customize app settings.
+
+**Community Screen**
+Optional Feature: Users can interact and engage with other users to converse about streamer-related content.
+
 
 ## 3. Navigation
 
@@ -60,36 +64,41 @@ Required Feature: Users can adjust notification preferences and customize app se
 
 Home – A feed displaying live streams from all affiliated platforms.
 Search – Search for streamers, games, or specific content.
-Community – Access trending streams, engage in discussions, and share content.
+Community (Optional) – Access trending streams, engage in discussions, and share content.
 Profile – Manage personal account, notification preferences, and app settings.
-
+Settings - Manage personal app preferances 
 
 **Flow Navigation (Screen to Screen):**
 
 ##### Login/Signup Screen
-Login Screen → Leads to Home Feed.
+Login/Signup Screen → Leads to Home Feed.
 ##### Home Feed
 Home Feed → Leads to Stream Viewer (when a stream is selected).
-Home Feed → Leads to Search Screen (via search bar)
+Home Feed → Leads to Search Screen (via button)
 ##### Search Screen
 Search Screen → Leads to Stream Viewer (when a stream is selected).
 ##### Stream Viewer
-Stream Viewer → Leads back to Home Feed or Search Screen.
+Stream Viewer → Leads back to Home Feed 
+Stream Viewer → Leads to Streamers Page
+#### Profile Viewer
+Profile Viewer → Leads to Edit Profile Screen
+Profile Viewer → Leads back to Login/Signup Screen (via logout button)
+Profile Viewer → Leads to Settings Screen
 ##### Settings Screen
-Settings Screen → Accessible from any tab, allowing users to manage their accounts and preferences.
+Settings Screen → Leads back to Profile Screen
 
 ## 4. How It Works
 
 * Account Creation & Login: Users sign up or log in to personalize their experience
-* Browse the Feed: The Home Feed shows live streams from all affiliated platforms in one place, displaying stream previews, game titles, and streamers.
+* Browse the Feed: The Home Feed shows live streams of all recommended or followed content from all affiliated platforms in one place, displaying stream previews, game titles, and streamers.
 * Search & Discover: Users can search for specific streamers, games, or categories to find live content they love.
 * Watch & Redirect: Clicking on a stream redirects users to the original platform to watch the stream in its native interface.
-* Interact: Users can engage with chats (when available) and manage notification preferences for stream updates.
+* Interact: Users can engage with chats (when available) and manage notification preferences to stay posted for stream updates.
 
 ## 5. Future Considerations
 
 1. Monetization: Potential revenue through in-app ads, partnerships, or premium features.
-2. Technical Specs: Backend implementation with APIs for live stream data retrieval and platform integration; front-end built using scalable technologies for mobile and future desktop expansion.
+2. Technical Specs: Backend implementation with APIs for more live stream data retrieval and platform integration; front-end built using scalable technologies for mobile and future desktop expansion.
 3. Security & Privacy: Ensure secure user data management and compliance with data protection regulations (e.g., GDPR).
 4. Accessibility: Design with accessibility in mind, ensuring features like screen readers, color contrast adjustments, and easy navigation for all users.
 
@@ -99,4 +108,10 @@ Progress Update 1:
 
 <img style="max-width:300px;" src="StreamCity/Progress Update1.gif">
 
+Progress Update 2:
+
+<img style="max-width:300px;" src="">
+
 GIF(s) created with VEED.io
+
+
