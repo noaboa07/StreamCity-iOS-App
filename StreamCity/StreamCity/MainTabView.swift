@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainTabView: View {
     @Binding var isLoggedIn: Bool // Bind this to control login state
+    @State private var username: String = "Loading..." // State to store the username
 
     var body: some View {
         TabView {
@@ -24,13 +25,15 @@ struct MainTabView: View {
                 }
                 .accessibilityLabel("Search Tab")
             
-            CommunityView()
+            // Pass the username to CommunityView
+            CommunityView(username: $username)
                 .tabItem {
                     Label("Community", systemImage: "person.3.fill")
                 }
                 .accessibilityLabel("Community Tab")
             
-            ProfileView(isLoggedIn: $isLoggedIn) // Pass the binding here
+            // Pass the binding for isLoggedIn to ProfileView
+            ProfileView(isLoggedIn: $isLoggedIn, username: $username) // Pass username here
                 .tabItem {
                     Label("Profile", systemImage: "person.circle")
                 }

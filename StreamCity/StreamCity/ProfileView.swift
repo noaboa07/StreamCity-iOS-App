@@ -10,13 +10,13 @@ import FirebaseAuth
 import FirebaseFirestore
 
 struct ProfileView: View {
-    @State private var username: String = "Loading..."
     @State private var profileImage: String = "https://via.placeholder.com/150"
     @State private var age: Int = 18  // Default age
     @State private var followedStreamers: [String] = [] // Updated from mock streamers
     @State private var isLoading: Bool = true
     @State private var hasError: Bool = false
     @Binding var isLoggedIn: Bool
+    @Binding var username: String // Bind the username here
     @State private var showLogoutConfirmation = false
 
     @State private var showingSettings = false  // To manage the settings sheet
@@ -44,7 +44,7 @@ struct ProfileView: View {
                                 .clipShape(Circle())
                         }
                         
-                        Text(username)
+                        Text(username) // Display the username
                             .font(.title)
                             .fontWeight(.bold)
                             .padding(.top, 10)

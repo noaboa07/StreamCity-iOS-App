@@ -26,7 +26,7 @@ Scope: A robust app with a strong foundational feature set and potential for exp
 - [✅︎] Users can chat within streams (if supported by the platform).
 - [✅︎] Users can customize their profiles through an "Edit Profile Screen" which allows users to change features such as their profile picture, profile name, age, etc.
 - [✅︎] User data is saved upon closing the app or logging out (via FireStore)
-- [] Users can access a settings page to change for a better user friendly environment (e.g dark mode)
+- [✅︎] Users can access a settings page to change for a better user friendly environment (e.g dark mode)
 
 **Optional Nice-to-have Stories:**
 
@@ -35,6 +35,7 @@ Scope: A robust app with a strong foundational feature set and potential for exp
 - [] Users post clips and saved highlights from live streams on the community page (perhaps share with friends?)
 - [✅︎] Users can click on a followed streamer and it will bring them to their platform page
 - [✅︎] Users can engage in a community hub for discussing streams and sharing content.
+- [✅︎] Users can like and dislike posts on the Community Page
 - [] Users can link their platform accounts to StreamCity (Twitch, YouTube, TikTok, etc.).
 - [] Users can access other users profiles via the Community Board to view linked accounts and followed streamers.
 - [] Streamers can access a basic dashboard to track their followers and engagement stats.
@@ -66,7 +67,7 @@ Optional Feature: Users can interact and engage with other users to converse abo
 Home – A feed displaying live streams from all affiliated platforms.
 Search – Search for streamers, games, or specific content.
 Community (Optional) – Access trending streams, engage in discussions, and share content.
-Profile – Manage personal account, notification preferences, and app settings.
+Profile – Manage personal account, preferences, and app settings.
 
 **Flow Navigation (Screen to Screen):**
 
