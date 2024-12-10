@@ -53,7 +53,7 @@ Required Feature: Users can be redirected from a selected livestream to watch a 
 Required Feature: Users can search for streamers, games, or from various categories to find content of interest.
 
 **Settings Screen**
-Required Feature: Users can adjust notification preferences and customize app settings.
+Required Feature: Users can adjust & customize app settings.
 
 **Community Screen**
 Optional Feature: Users can interact and engage with other users to converse about streamer-related content.
