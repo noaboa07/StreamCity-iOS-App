@@ -6,27 +6,45 @@
 //
 
 import SwiftUI
-import Foundation
 
 struct SearchBar: View {
     @Binding var text: String
+    @State private var isEditing = false
     
     var body: some View {
         HStack {
+            // Magnifying glass icon
             Image(systemName: "magnifyingglass")
-                .foregroundColor(.gray)
+                .foregroundColor(isEditing ? .blue : .gray)
             
-            TextField("Search", text: $text)
-                .padding(7)
-                .background(Color(.secondarySystemBackground))
-                .cornerRadius(8)
-                .padding(.horizontal, 10)
+            // TextField for search input
+            TextField("Search", text: $text, onEditingChanged: { editing in
+                isEditing = editing
+            })
+            .padding(7)
+            .background(Color(.secondarySystemBackground))
+            .cornerRadius(8)
+            .padding(.horizontal, 10)
+            .accessibilityLabel("Search for streams")
+            .accessibilityHint("Type a keyword to search stream titles, categories, or streamers")
+            
+            // Clear button when text is entered
+            if isEditing && !text.isEmpty {
+                Button(action: {
+                    text = ""
+                    isEditing = false
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(.gray)
+                        .padding(.trailing, 10)
+                }
+                .accessibilityLabel("Clear search field")
+            }
         }
-        .background(Color(.systemGray6))
+        .background(Color(.systemGray6))  // Light background for the search bar
         .cornerRadius(8)
         .padding(.horizontal)
-        .accessibilityLabel("Search bar")
-        .accessibilityHint("Type a keyword to search streams")
+        .animation(.easeInOut, value: isEditing)
     }
 }
 

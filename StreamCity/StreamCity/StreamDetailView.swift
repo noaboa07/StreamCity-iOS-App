@@ -10,10 +10,15 @@ import SwiftUI
 struct StreamDetailView: View {
     let stream: Stream
     
+    // Twitch Stream URL
+    private var streamURL: String {
+        "https://www.twitch.tv/\(stream.streamerName)"
+    }
+
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                // Stream thumbnail with loading and error states
+                // Stream thumbnail with loading, success, and failure states
                 AsyncImage(url: URL(string: stream.thumbnailURL)) { phase in
                     switch phase {
                     case .success(let image):
@@ -23,20 +28,22 @@ struct StreamDetailView: View {
                             .frame(height: 200)
                             .cornerRadius(12)
                             .clipped()
+                            .onTapGesture {
+                                openStream()
+                            }
                             .accessibilityLabel("Thumbnail of the stream titled \(stream.title)")
                     case .failure:
-                        VStack {
-                            Text("Image not available")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding(6)
-                                .background(Color.red)
-                                .cornerRadius(8)
-                            Color.red
-                                .frame(height: 200)
-                                .cornerRadius(12)
-                        }
-                        .accessibilityLabel("Failed to load thumbnail for \(stream.title)")
+                        Image(systemName: "photo.fill")
+                            .resizable()
+                            .frame(height: 200)
+                            .scaledToFit()
+                            .cornerRadius(12)
+                            .background(Color.gray.opacity(0.2))
+                            .foregroundColor(.white)
+                            .onTapGesture {
+                                openStream()
+                            }
+                            .accessibilityLabel("Failed to load thumbnail for \(stream.title)")
                     case .empty:
                         ProgressView()
                             .frame(height: 200)
@@ -47,18 +54,28 @@ struct StreamDetailView: View {
                             .cornerRadius(12)
                     }
                 }
-                
+
                 // Streamer details
                 VStack(alignment: .leading, spacing: 10) {
                     Text(stream.streamerName)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .accessibilityLabel("Streamer: \(stream.streamerName)")
-                    
+
                     Text(stream.title)
                         .font(.title2)
                         .foregroundColor(.gray)
                         .accessibilityLabel("Stream Title: \(stream.title)")
+
+                    HStack {
+                        Text("\(stream.formattedViewerCount) viewers")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        Spacer()
+                        Text(stream.streamCategory)
+                            .font(.subheadline)
+                            .foregroundColor(.blue)
+                    }
                 }
                 .padding()
                 .background(Color(UIColor.systemBackground))
@@ -70,6 +87,13 @@ struct StreamDetailView: View {
         .background(Color(UIColor.secondarySystemBackground).edgesIgnoringSafeArea(.all))
         .navigationTitle("Stream Details")
         .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    // Function to open stream URL in Safari
+    private func openStream() {
+        if let url = URL(string: streamURL) {
+            UIApplication.shared.open(url)
+        }
     }
 }
 

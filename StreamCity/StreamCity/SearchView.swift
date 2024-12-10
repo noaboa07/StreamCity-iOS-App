@@ -9,43 +9,98 @@ import SwiftUI
 
 struct SearchView: View {
     @State private var searchQuery: String = "" // User's search query
-    @State private var filteredStreams: [Stream] = mockStreams // Streams filtered by search query
-    
+    @State private var streams: [Stream] = [] // All fetched streams
+    @State private var filteredStreams: [Stream] = [] // Filtered streams
+    @State private var isLoading: Bool = false // Loading state
+    @State private var debounceTimer: Timer? // For debouncing search input
+
     var body: some View {
         NavigationView {
             VStack {
-                // Search Bar
+                // Search Bar with clear button
                 SearchBar(text: $searchQuery)
                     .padding(.horizontal)
                 
-                // Filtered List of Streams
-                ScrollView {
-                    LazyVStack(spacing: 16) {
-                        ForEach(filteredStreams) { stream in
-                            NavigationLink(destination: StreamDetailView(stream: stream)) {
-                                StreamCardView(stream: stream)
-                                    .padding(.horizontal)
+                // Loading indicator
+                if isLoading {
+                    ProgressView("Loading streams...")
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .padding()
+                } else {
+                    // Show total result count
+                    if !searchQuery.isEmpty {
+                        Text("\(filteredStreams.count) results found")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .padding(.top, 5)
+                            .padding(.horizontal)
+                    }
+                    
+                    // Filtered List of Streams
+                    ScrollView {
+                        LazyVStack(spacing: 16) {
+                            ForEach(filteredStreams) { stream in
+                                NavigationLink(destination: StreamDetailView(stream: stream)) {
+                                    StreamCardView(stream: stream)
+                                        .padding(.horizontal)
+                                }
                             }
                         }
                     }
                 }
-                .navigationTitle("Search Streams")
-                .onChange(of: searchQuery) { _, newQuery in
-                    // Filter streams based on search query
-                    filterStreams(query: newQuery)
+            }
+            .onAppear {
+                loadStreams(query: nil) // Load all streams initially
+            }
+            .onChange(of: searchQuery) { newQuery in
+                // Debounce the search function to avoid too many API calls
+                debounceSearch(query: newQuery)
+            }
+            .navigationTitle("Search Streams")
+        }
+    }
+    
+    // Function to fetch streams from the network
+    private func loadStreams(query: String?) {
+        isLoading = true
+        TwitchNetworkManager.shared.getAccessToken { token in
+            if let token = token {
+                TwitchNetworkManager.shared.fetchLiveStreams(accessToken: token, query: query) { fetchedStreams in
+                    DispatchQueue.main.async {
+                        if let fetchedStreams = fetchedStreams {
+                            self.streams = fetchedStreams
+                            self.filteredStreams = fetchedStreams // Show all initially
+                        }
+                        self.isLoading = false
+                    }
                 }
+            } else {
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                print("Failed to retrieve access token")
             }
         }
     }
     
+    // Function to filter streams based on search query
     private func filterStreams(query: String) {
         if query.isEmpty {
-            filteredStreams = mockStreams
+            filteredStreams = streams
         } else {
-            filteredStreams = mockStreams.filter {
+            filteredStreams = streams.filter {
                 $0.streamerName.lowercased().contains(query.lowercased()) ||
                 $0.title.lowercased().contains(query.lowercased())
             }
+        }
+    }
+
+    // Debounced search to avoid repeated API calls
+    private func debounceSearch(query: String) {
+        debounceTimer?.invalidate() // Invalidate any existing timer
+        
+        debounceTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+            filterStreams(query: query)
         }
     }
 }

@@ -35,7 +35,7 @@ class TwitchNetworkManager {
     private let clientId = "7nsw5ill3xd5p1f5b7fk3ak8mc7q12" // Update your client ID here
     private let clientSecret = "5fdbpor3nlix157s7c04wnqa303g9v" // Update your client secret here
     private let tokenURL = "https://id.twitch.tv/oauth2/token"
-    private let streamsURL = "https://api.twitch.tv/helix/streams?first=10"
+    private let streamsURL = "https://api.twitch.tv/helix/streams?first=100" // Max limit is 100 per request
 
     private init() {}
 
@@ -75,9 +75,16 @@ class TwitchNetworkManager {
         task.resume()
     }
 
-    // Function to fetch live streams using the access token
-    func fetchLiveStreams(accessToken: String, completion: @escaping ([Stream]?) -> Void) {
-        guard let url = URL(string: streamsURL) else {
+    // Function to fetch live streams using the access token and optional search query
+    func fetchLiveStreams(accessToken: String, query: String? = nil, completion: @escaping ([Stream]?) -> Void) {
+        var urlString = streamsURL
+        
+        // If a query is provided, we append it to the URL
+        if let query = query, !query.isEmpty {
+            urlString += "&game_name=\(query)"
+        }
+
+        guard let url = URL(string: urlString) else {
             print("Invalid streams request URL.")
             completion(nil)
             return

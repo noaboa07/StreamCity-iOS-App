@@ -8,32 +8,30 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var searchText: String = "" // Search query state
     @State private var streams: [Stream] = [] // Data source for streams
     @State private var isLoading: Bool = false // Loading state for data fetching
 
     var body: some View {
         NavigationView {
             VStack {
-                // Search Bar
-                TextField("Search streams...", text: $searchText)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                    .onChange(of: searchText) {
-                        // Filter streams on text change
-                        filterStreams()
-                    }
+                // Title at the top
+                Text("Recommended for you:")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .padding(.top, 20)
+                    .padding(.horizontal)
 
-                // Filtered Stream List
+                // If loading, show progress indicator
                 if isLoading {
                     ProgressView("Loading...")
                         .progressViewStyle(CircularProgressViewStyle())
                         .padding()
                 } else {
-                    List(filteredStreams) { stream in
+                    // Display top 10 streams
+                    List(streams.prefix(10)) { stream in
                         NavigationLink(destination: StreamDetailView(stream: stream)) {
                             HStack {
-                                // Streamer avatar
+                                // Streamer avatar with AsyncImage
                                 AsyncImage(url: URL(string: stream.streamerAvatarURL ?? "")) { phase in
                                     if let image = phase.image {
                                         image
@@ -63,7 +61,7 @@ struct HomeView: View {
                                         .foregroundColor(.gray)
 
                                     HStack {
-                                        Text("\(stream.viewerCount) viewers")
+                                        Text(stream.formattedViewerCount + " viewers")
                                             .font(.caption)
                                             .foregroundColor(.secondary)
                                         Text(stream.streamCategory)
@@ -89,24 +87,24 @@ struct HomeView: View {
                         }
                     }
                     .listStyle(PlainListStyle())
-                    .navigationTitle("Live Streams")
+                    .navigationTitle("Trending Now")
+                    .disabled(isLoading)  // Disable list interaction while loading
+                    
+                    // Button to go to SearchView (full list of streams)
+                    NavigationLink(destination: SearchView()) {
+                        Text("Browse Streams")
+                            .font(.subheadline)
+                            .foregroundColor(.blue)
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(8)
+                            .shadow(radius: 5)
+                            .padding(.top, 10)
+                    }
                 }
             }
             .onAppear {
                 loadStreams()
-            }
-        }
-    }
-
-    // Computed property to filter streams
-    private var filteredStreams: [Stream] {
-        if searchText.isEmpty {
-            return streams
-        } else {
-            return streams.filter { stream in
-                stream.streamerName.lowercased().contains(searchText.lowercased()) ||
-                stream.title.lowercased().contains(searchText.lowercased()) ||
-                stream.streamCategory.lowercased().contains(searchText.lowercased())
             }
         }
     }
@@ -117,16 +115,11 @@ struct HomeView: View {
         TwitchNetworkManager.shared.getAccessToken { token in
             if let token = token {
                 TwitchNetworkManager.shared.fetchLiveStreams(accessToken: token) { fetchedStreams in
-                    if let fetchedStreams = fetchedStreams {
-                        DispatchQueue.main.async {
+                    DispatchQueue.main.async {
+                        if let fetchedStreams = fetchedStreams {
                             self.streams = fetchedStreams
-                            self.isLoading = false
                         }
-                    } else {
-                        DispatchQueue.main.async {
-                            self.isLoading = false
-                        }
-                        print("Failed to fetch streams")
+                        self.isLoading = false
                     }
                 }
             } else {
@@ -137,11 +130,6 @@ struct HomeView: View {
             }
         }
     }
-
-    // Function to filter streams based on search text
-    private func filterStreams() {
-        // You could implement more complex search filtering logic here if needed
-    }
 }
 
 struct HomeView_Previews: PreviewProvider {
@@ -151,3 +139,4 @@ struct HomeView_Previews: PreviewProvider {
             .padding()
     }
 }
+

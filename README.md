@@ -18,22 +18,24 @@ Scope: A robust app with a strong foundational feature set and potential for exp
 ## 1. User Stories
 **Required Must-have Stories:**
 
-- [✅︎] Users can create an account and log in (via Firebase).
-- [] Users can link accounts from multiple streaming platforms (e.g., Twitch, YouTube, Facebook Gaming).
-- [✅︎] Users can follow streamers and receive notifications for live streams.
-- [✅︎] Users can view a unified feed of live streams from all linked platforms.
-- [] Users can click on a stream to be redirected to the original streaming platform to watch.
+- [✅︎] Users can create an account and/or log in (via FireAuth).
+- [✅︎] Users can search through a large vareity of different streams from platforms affiliated with StreamCity.
+- [✅︎] Users can follow streamers on StreamCity and receive notifications for live streams.
+- [✅︎] Users can view a unified feed of recommended (and followed streamers) live streams from all affiliated platforms.
+- [✅︎] Users can click on a stream to be redirected to the original streaming platform to watch.
 - [✅︎] Users can chat within streams (if supported by the platform).
 - [✅︎] Users can customize profile settings including their avatar, profile name, etc.
-- [] Users can access a settings page to change for a better user friendly enviornment (e.g dark mode)
+- [✅︎] User data is saved upon closing the app or logging out (via FireStore)
+- [] Users can access a settings page to change for a better user friendly environment (e.g dark mode)
 
 **Optional Nice-to-have Stories:**
 
 - [✅︎] Users can view trending streams and recommended content.
 - [] Users can use a multi-stream view to watch multiple streams at once.
-- [] Users can clip and save highlights from live streams.
+- [] Users post clips and saveed highlights from live streams on the community page.
 - [✅︎] Users can engage in a community hub for discussing streams and sharing content.
-- [] Users can use AR or VR features to create immersive viewing experiences.
+- [] Users can link their platform accounts to StreamCity.
+- [] Users can access other users profiles via the Community board
 - [] Streamers can access a basic dashboard to track their followers and engagement stats.
 
 ## 2. Screen Archetypes
@@ -56,7 +58,7 @@ Required Feature: Users can adjust notification preferences and customize app se
 
 **Tab Navigation (Tab to Screen)**
 
-Home – A feed displaying live streams from all linked platforms.
+Home – A feed displaying live streams from all affiliated platforms.
 Search – Search for streamers, games, or specific content.
 Community – Access trending streams, engage in discussions, and share content.
 Profile – Manage personal account, notification preferences, and app settings.
@@ -79,7 +81,7 @@ Settings Screen → Accessible from any tab, allowing users to manage their acco
 ## 4. How It Works
 
 * Account Creation & Login: Users sign up or log in to personalize their experience
-* Browse the Feed: The Home Feed shows live streams from all linked platforms in one place, displaying stream previews, game titles, and streamers.
+* Browse the Feed: The Home Feed shows live streams from all affiliated platforms in one place, displaying stream previews, game titles, and streamers.
 * Search & Discover: Users can search for specific streamers, games, or categories to find live content they love.
 * Watch & Redirect: Clicking on a stream redirects users to the original platform to watch the stream in its native interface.
 * Interact: Users can engage with chats (when available) and manage notification preferences for stream updates.

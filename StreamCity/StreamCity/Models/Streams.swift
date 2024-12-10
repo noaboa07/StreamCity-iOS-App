@@ -10,7 +10,7 @@ import SwiftUI
 
 // Stream Model
 struct Stream: Identifiable {
-    let id = UUID()
+    let id = UUID() // Unique identifier for SwiftUI lists
     let streamerName: String
     let title: String
     let thumbnailURL: String
@@ -18,10 +18,12 @@ struct Stream: Identifiable {
     let streamCategory: String
     let isLive: Bool
     let streamerAvatarURL: String?
-    
+
     // Computed property for formatted viewer count
     var formattedViewerCount: String {
-        if viewerCount >= 1_000 {
+        if viewerCount >= 1_000_000 {
+            return String(format: "%.1fM", Double(viewerCount) / 1_000_000)
+        } else if viewerCount >= 1_000 {
             return String(format: "%.1fK", Double(viewerCount) / 1_000)
         } else {
             return "\(viewerCount)"
