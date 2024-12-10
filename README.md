@@ -66,7 +66,6 @@ Home – A feed displaying live streams from all affiliated platforms.
 Search – Search for streamers, games, or specific content.
 Community (Optional) – Access trending streams, engage in discussions, and share content.
 Profile – Manage personal account, notification preferences, and app settings.
-Settings - Manage personal app preferances 
 
 **Flow Navigation (Screen to Screen):**
 
