@@ -14,14 +14,16 @@ struct ProfileEditView: View {
     @Binding var username: String
     @Binding var profileImage: String
     @State private var newUsername: String
+    @State private var age: Int
     @State private var showSaveConfirmation = false
     @State private var showImagePicker = false
     @State private var selectedImage: UIImage? = nil
 
-    init(username: Binding<String>, profileImage: Binding<String>) {
+    init(username: Binding<String>, profileImage: Binding<String>, age: Binding<Int>) {
         _username = username
         _profileImage = profileImage
         _newUsername = State(initialValue: username.wrappedValue)
+        _age = State(initialValue: age.wrappedValue)
     }
 
     var body: some View {
@@ -36,6 +38,18 @@ struct ProfileEditView: View {
                 TextField("Enter new username", text: $newUsername)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
+            }
+
+            // Age Edit (13+)
+            HStack {
+                Text("Age:")
+                Picker("Select Age", selection: $age) {
+                    ForEach(13..<100, id: \.self) { age in
+                        Text("\(age)").tag(age)
+                    }
+                }
+                .pickerStyle(WheelPickerStyle())
+                .padding()
             }
 
             // Profile Image Edit
@@ -109,31 +123,10 @@ struct ProfileEditView: View {
         .sheet(isPresented: $showImagePicker) {
             PhotoPicker(isPresented: $showImagePicker, selectedImage: $selectedImage)
         }
-        .onAppear {
-            loadProfileImage()
-        }
-    }
-
-    private func loadProfileImage() {
-        guard let user = Auth.auth().currentUser else { return }
-        
-        let fileManager = FileManager.default
-        let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let imagePath = documentsPath.appendingPathComponent("\(user.uid)_profile.jpg")
-        
-        if fileManager.fileExists(atPath: imagePath.path) {
-            if let image = UIImage(contentsOfFile: imagePath.path) {
-                profileImage = imagePath.absoluteString
-            } else {
-                print("Failed to load image from path: \(imagePath.path)")
-            }
-        } else {
-            print("Image not found at path: \(imagePath.path)")
-        }
     }
 
     private func saveProfileChanges() {
-        guard !newUsername.isEmpty || selectedImage != nil else {
+        guard !newUsername.isEmpty || selectedImage != nil || age != 0 else {
             return
         }
 
@@ -146,7 +139,7 @@ struct ProfileEditView: View {
             if !newUsername.isEmpty && newUsername != username {
                 updates["username"] = newUsername
             }
-            
+
             // Save the image locally and create a usable URL
             if let image = selectedImage {
                 let fileManager = FileManager.default
@@ -161,6 +154,11 @@ struct ProfileEditView: View {
                         print("Error saving image locally: \(error)")
                     }
                 }
+            }
+
+            // Update age if changed
+            if age != 0 {
+                updates["age"] = age
             }
 
             userRef.updateData(updates) { error in

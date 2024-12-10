@@ -24,7 +24,7 @@ Scope: A robust app with a strong foundational feature set and potential for exp
 - [✅︎] Users can view a unified feed of recommended (and followed streamers) live streams from all affiliated platforms from the Home Page.
 - [✅︎] Users can click on a stream to be redirected to the original streaming platform to watch.
 - [✅︎] Users can chat within streams (if supported by the platform).
-- [✅︎] Users can customize profile settings including their avatar, profile name, etc.
+- [✅︎] Users can customize their profiles through an "Edit Profile Screen" which allows users to change features such as their profile picture, profile name, age, etc.
 - [✅︎] User data is saved upon closing the app or logging out (via FireStore)
 - [] Users can access a settings page to change for a better user friendly environment (e.g dark mode)
 

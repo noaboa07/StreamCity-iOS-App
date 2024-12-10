@@ -12,6 +12,7 @@ import FirebaseFirestore
 struct ProfileView: View {
     @State private var username: String = "Loading..."
     @State private var profileImage: String = "https://via.placeholder.com/150"
+    @State private var age: Int = 18  // Default age
     @State private var followedStreamers: [String] = ["ArtLover", "MusicFanatic"]
     @State private var isLoading: Bool = true
     @State private var hasError: Bool = false
@@ -45,6 +46,11 @@ struct ProfileView: View {
                             .font(.title)
                             .fontWeight(.bold)
                             .padding(.top, 10)
+
+                        Text("Age: \(age)")
+                            .font(.body)
+                            .padding(.top)
+
                     }
                     .padding()
 
@@ -72,7 +78,7 @@ struct ProfileView: View {
                     }
                     .padding(.horizontal)
 
-                    NavigationLink(destination: ProfileEditView(username: $username, profileImage: $profileImage)) {
+                    NavigationLink(destination: ProfileEditView(username: $username, profileImage: $profileImage, age: $age)) {
                         Text("Edit Profile")
                             .font(.headline)
                             .foregroundColor(.blue)
@@ -125,6 +131,7 @@ struct ProfileView: View {
                 let data = document.data() ?? [:]
                 username = data["username"] as? String ?? "Unknown User"
                 profileImage = data["profileImage"] as? String ?? "https://via.placeholder.com/150"
+                age = data["age"] as? Int ?? 18  // Default to 18 if no age is stored
                 isLoading = false
             } else {
                 print("Error fetching user data: \(error?.localizedDescription ?? "Unknown error")")
