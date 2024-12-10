@@ -18,22 +18,22 @@ Scope: A robust app with a strong foundational feature set and potential for exp
 ## 1. User Stories
 **Required Must-have Stories:**
 
-- Users can create an account and log in (via Firebase).
-- Users can link accounts from multiple streaming platforms (e.g., Twitch, YouTube, Facebook Gaming).
-- Users can follow streamers and receive notifications for live streams.
-- Users can view a unified feed of live streams from all linked platforms.
-- Users can click on a stream to be redirected to the original streaming platform to watch.
-- Users can chat within streams (if supported by the platform).
-- Users can customize notification settings for individual streamers or platforms.
+- [✅︎] Users can create an account and log in (via Firebase).
+- [] Users can link accounts from multiple streaming platforms (e.g., Twitch, YouTube, Facebook Gaming).
+- [✅︎] Users can follow streamers and receive notifications for live streams.
+- [✅︎] Users can view a unified feed of live streams from all linked platforms.
+- [] Users can click on a stream to be redirected to the original streaming platform to watch.
+- [] Users can chat within streams (if supported by the platform).
+- [] Users can customize notification settings for individual streamers or platforms.
 
 **Optional Nice-to-have Stories:**
 
-- Users can view trending streams and recommended content.
-- Users can use a multi-stream view to watch multiple streams at once.
-- Users can clip and save highlights from live streams.
-- Users can engage in a community hub for discussing streams and sharing content.
-- Users can use AR or VR features to create immersive viewing experiences.
-- Streamers can access a basic dashboard to track their followers and engagement stats.
+- [] Users can view trending streams and recommended content.
+- [] Users can use a multi-stream view to watch multiple streams at once.
+- [] Users can clip and save highlights from live streams.
+- [] Users can engage in a community hub for discussing streams and sharing content.
+- [] Users can use AR or VR features to create immersive viewing experiences.
+- [] Streamers can access a basic dashboard to track their followers and engagement stats.
 
 ## 2. Screen Archetypes
 **Login/Signup Screen**
