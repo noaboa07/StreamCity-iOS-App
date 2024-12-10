@@ -90,3 +90,11 @@ Settings Screen → Accessible from any tab, allowing users to manage their acco
 2. Technical Specs: Backend implementation with APIs for live stream data retrieval and platform integration; front-end built using scalable technologies for mobile and future desktop expansion.
 3. Security & Privacy: Ensure secure user data management and compliance with data protection regulations (e.g., GDPR).
 4. Accessibility: Design with accessibility in mind, ensuring features like screen readers, color contrast adjustments, and easy navigation for all users.
+
+## Progress Updates:
+
+My video Walkthrough(s):
+
+<img style="max-width:300px;" src="">
+
+GIF(s) created with VEED.io
