@@ -19,7 +19,7 @@ Scope: A robust app with a strong foundational feature set and potential for exp
 **Required Must-have Stories:**
 
 - [✅︎] Users can create an account and/or log in (via FireAuth + FireStore).
-- [✅︎] Users can search through a large vareity of different streams from platforms affiliated with StreamCity.
+- [✅︎] Users can search through a large variety of different streams from platforms affiliated with StreamCity.
 - [✅︎] Users can follow streamers on StreamCity and receive notifications for live streams.
 - [✅︎] Users can view a unified feed of recommended (and followed streamers) live streams from all affiliated platforms from the Home Page.
 - [✅︎] Users can click on a stream to be redirected to the original streaming platform to watch.
