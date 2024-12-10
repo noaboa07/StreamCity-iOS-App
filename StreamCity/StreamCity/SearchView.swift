@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+import FirebaseFirestore
 
 struct SearchView: View {
     @State private var searchQuery: String = "" // User's search query
@@ -13,6 +15,7 @@ struct SearchView: View {
     @State private var filteredStreams: [Stream] = [] // Filtered streams
     @State private var isLoading: Bool = false // Loading state
     @State private var debounceTimer: Timer? // For debouncing search input
+    @State private var followedStreamers: [String] = [] // To track followed streamers
 
     var body: some View {
         NavigationView {
@@ -40,10 +43,29 @@ struct SearchView: View {
                     ScrollView {
                         LazyVStack(spacing: 16) {
                             ForEach(filteredStreams) { stream in
-                                NavigationLink(destination: StreamDetailView(stream: stream)) {
-                                    StreamCardView(stream: stream)
-                                        .padding(.horizontal)
+                                HStack {
+                                    NavigationLink(destination: StreamDetailView(stream: stream)) {
+                                        StreamCardView(stream: stream)
+                                    }
+
+                                    Spacer()
+
+                                    // Follow button (plus or checkmark icon)
+                                    Button(action: {
+                                        if followedStreamers.contains(stream.streamerName) {
+                                            unfollowStreamer(stream.streamerName)
+                                        } else {
+                                            followStreamer(stream.streamerName)
+                                        }
+                                    }) {
+                                        Image(systemName: followedStreamers.contains(stream.streamerName) ? "checkmark.circle.fill" : "plus.circle.fill")
+                                            .font(.title)
+                                            .foregroundColor(followedStreamers.contains(stream.streamerName) ? .gray : .blue)
+                                    }
+                                    .padding(.trailing)
+                                    .disabled(isLoading) // Disable button if loading
                                 }
+                                .padding(.horizontal)
                             }
                         }
                     }
@@ -51,6 +73,7 @@ struct SearchView: View {
             }
             .onAppear {
                 loadStreams(query: nil) // Load all streams initially
+                loadFollowedStreamers() // Load followed streamers
             }
             .onChange(of: searchQuery) { newQuery in
                 // Debounce the search function to avoid too many API calls
@@ -101,6 +124,67 @@ struct SearchView: View {
         
         debounceTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
             filterStreams(query: query)
+        }
+    }
+    
+    // Function to load followed streamers from Firestore
+    private func loadFollowedStreamers() {
+        guard let user = Auth.auth().currentUser else { return }
+
+        let db = Firestore.firestore()
+        let userRef = db.collection("users").document(user.uid)
+
+        userRef.getDocument { document, error in
+            if let document = document, document.exists {
+                let data = document.data() ?? [:]
+                followedStreamers = data["followedStreamers"] as? [String] ?? []
+            }
+        }
+    }
+
+    // Function to follow a streamer and update Firestore
+    private func followStreamer(_ streamerName: String) {
+        guard let user = Auth.auth().currentUser else { return }
+
+        let db = Firestore.firestore()
+        let userRef = db.collection("users").document(user.uid)
+
+        // Only add the streamer if it's not already followed
+        if !followedStreamers.contains(streamerName) {
+            followedStreamers.append(streamerName)
+
+            // Update Firestore
+            userRef.updateData([
+                "followedStreamers": followedStreamers
+            ]) { error in
+                if let error = error {
+                    print("Error following streamer: \(error.localizedDescription)")
+                } else {
+                    print("Streamer followed successfully!")
+                }
+            }
+        }
+    }
+
+    // Function to unfollow a streamer and update Firestore
+    private func unfollowStreamer(_ streamerName: String) {
+        guard let user = Auth.auth().currentUser else { return }
+
+        let db = Firestore.firestore()
+        let userRef = db.collection("users").document(user.uid)
+
+        // Remove streamer from the followed list
+        followedStreamers.removeAll { $0 == streamerName }
+
+        // Update Firestore
+        userRef.updateData([
+            "followedStreamers": followedStreamers
+        ]) { error in
+            if let error = error {
+                print("Error unfollowing streamer: \(error.localizedDescription)")
+            } else {
+                print("Streamer unfollowed successfully!")
+            }
         }
     }
 }

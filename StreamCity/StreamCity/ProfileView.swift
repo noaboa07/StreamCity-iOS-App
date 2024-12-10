@@ -13,11 +13,13 @@ struct ProfileView: View {
     @State private var username: String = "Loading..."
     @State private var profileImage: String = "https://via.placeholder.com/150"
     @State private var age: Int = 18  // Default age
-    @State private var followedStreamers: [String] = ["ArtLover", "MusicFanatic"]
+    @State private var followedStreamers: [String] = [] // Updated from mock streamers
     @State private var isLoading: Bool = true
     @State private var hasError: Bool = false
     @Binding var isLoggedIn: Bool
     @State private var showLogoutConfirmation = false
+
+    @State private var showingSettings = false  // To manage the settings sheet
 
     var body: some View {
         NavigationView {
@@ -50,7 +52,6 @@ struct ProfileView: View {
                         Text("Age: \(age)")
                             .font(.body)
                             .padding(.top)
-
                     }
                     .padding()
 
@@ -63,7 +64,7 @@ struct ProfileView: View {
                             VStack(alignment: .leading) {
                                 ForEach(followedStreamers, id: \.self) { streamer in
                                     Button(action: {
-                                        print("Tapped on \(streamer)")
+                                        openStreamerProfile(streamer)
                                     }) {
                                         Text(streamer)
                                             .font(.body)
@@ -93,7 +94,20 @@ struct ProfileView: View {
             .navigationTitle("Profile")
             .onAppear(perform: loadProfileData)
             .toolbar {
+                // Gear icon to open settings
                 ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        showingSettings = true
+                    }) {
+                        Image(systemName: "gearshape.fill")  // Gear icon
+                            .foregroundColor(.blue)
+                    }
+                    .sheet(isPresented: $showingSettings) {
+                        SettingsView()  // Open the SettingsView when tapped
+                    }
+                }
+                // Logout button
+                ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
                         showLogoutConfirmation = true
                     }) {
@@ -132,12 +146,23 @@ struct ProfileView: View {
                 username = data["username"] as? String ?? "Unknown User"
                 profileImage = data["profileImage"] as? String ?? "https://via.placeholder.com/150"
                 age = data["age"] as? Int ?? 18  // Default to 18 if no age is stored
+                
+                // Load followed streamers
+                followedStreamers = data["followedStreamers"] as? [String] ?? []
+                
                 isLoading = false
             } else {
                 print("Error fetching user data: \(error?.localizedDescription ?? "Unknown error")")
                 hasError = true
                 isLoading = false
             }
+        }
+    }
+
+    private func openStreamerProfile(_ streamerName: String) {
+        // Assuming Twitch as the platform. Change URL as needed for other platforms
+        if let url = URL(string: "https://www.twitch.tv/\(streamerName)") {
+            UIApplication.shared.open(url)
         }
     }
 

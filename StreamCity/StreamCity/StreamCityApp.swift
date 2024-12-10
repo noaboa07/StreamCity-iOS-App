@@ -10,14 +10,18 @@ import FirebaseCore // <-- Import Firebase
 
 @main
 struct FireChatApp: App {
-
-    init() { // <-- Add an init
-        FirebaseApp.configure() // <-- Configure Firebase app
+    
+    // Global dark mode setting using @AppStorage
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = false  // Store dark mode preference
+    
+    init() {
+        FirebaseApp.configure()  // Configure Firebase app
     }
-
+    
     var body: some Scene {
         WindowGroup {
-            MainView()
+            MainView()  // Replace with the root view of your app
+                .preferredColorScheme(isDarkMode ? .dark : .light)  // Apply dark mode based on the stored preference
         }
     }
 }

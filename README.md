@@ -20,7 +20,7 @@ Scope: A robust app with a strong foundational feature set and potential for exp
 
 - [✅︎] Users can create an account and/or log in (via FireAuth + FireStore).
 - [✅︎] Users can search through a large variety of different streams from platforms affiliated with StreamCity.
-- [✅︎] Users can follow streamers on StreamCity and receive notifications for live streams.
+- [✅︎] Users can follow & unfollow streamers on StreamCity and receive notifications for live streams.
 - [✅︎] Users can view a unified feed of recommended (and followed streamers) live streams from all affiliated platforms from the Home Page.
 - [✅︎] Users can click on a stream to be redirected to the original streaming platform to watch.
 - [✅︎] Users can chat within streams (if supported by the platform).
@@ -33,6 +33,7 @@ Scope: A robust app with a strong foundational feature set and potential for exp
 - [✅︎] Users can view detailed information about streams and recommended content (e.g Viewer Coumt).
 - [] Users can send friend requests with one another and share content to each other
 - [] Users post clips and saved highlights from live streams on the community page (perhaps share with friends?)
+- [✅︎] Users can click on a followed streamer and it will bring them to their platform page
 - [✅︎] Users can engage in a community hub for discussing streams and sharing content.
 - [] Users can link their platform accounts to StreamCity (Twitch, YouTube, TikTok, etc.).
 - [] Users can access other users profiles via the Community Board to view linked accounts and followed streamers.

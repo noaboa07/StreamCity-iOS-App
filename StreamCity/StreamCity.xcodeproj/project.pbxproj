@@ -13,8 +13,6 @@
 		A3BCCA742D079B5A00F2FDDF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BCCA732D079B5A00F2FDDF /* LoginView.swift */; };
 		A3BCCA762D079BFD00F2FDDF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BCCA752D079BFD00F2FDDF /* MainView.swift */; };
 		A3BCCA782D079D2E00F2FDDF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3BCCA772D079D2E00F2FDDF /* GoogleService-Info.plist */; };
-		A3BCCA7A2D07A37600F2FDDF /* AccountLinkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BCCA792D07A37600F2FDDF /* AccountLinkingView.swift */; };
-		A3BCCA7C2D07A3B200F2FDDF /* OAuthHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BCCA7B2D07A3B200F2FDDF /* OAuthHandler.swift */; };
 		A3BCCA842D07AA7100F2FDDF /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BCCA832D07AA7100F2FDDF /* MainTabView.swift */; };
 		A3BCCA862D07AADC00F2FDDF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BCCA852D07AADC00F2FDDF /* HomeView.swift */; };
 		A3BCCA892D07AB3200F2FDDF /* Streams.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BCCA882D07AB3200F2FDDF /* Streams.swift */; };
@@ -27,6 +25,7 @@
 		A3BCCA972D07E3F000F2FDDF /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BCCA962D07E3F000F2FDDF /* ProfileEditView.swift */; };
 		A3BCCA992D07E80E00F2FDDF /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BCCA982D07E80E00F2FDDF /* PhotoPicker.swift */; };
 		A3BCCAA12D08047500F2FDDF /* TwitchNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BCCAA02D08047500F2FDDF /* TwitchNetworkManager.swift */; };
+		A3BCCAA32D08547300F2FDDF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BCCAA22D08547200F2FDDF /* SettingsView.swift */; };
 		A3EE19312CFBBBC200DE3544 /* StreamCityApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EE19302CFBBBC200DE3544 /* StreamCityApp.swift */; };
 		A3EE19332CFBBBC200DE3544 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EE19322CFBBBC200DE3544 /* ContentView.swift */; };
 		A3EE19352CFBBBC500DE3544 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3EE19342CFBBBC500DE3544 /* Assets.xcassets */; };
@@ -38,8 +37,6 @@
 		A3BCCA732D079B5A00F2FDDF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A3BCCA752D079BFD00F2FDDF /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		A3BCCA772D079D2E00F2FDDF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		A3BCCA792D07A37600F2FDDF /* AccountLinkingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLinkingView.swift; sourceTree = "<group>"; };
-		A3BCCA7B2D07A3B200F2FDDF /* OAuthHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthHandler.swift; sourceTree = "<group>"; };
 		A3BCCA832D07AA7100F2FDDF /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		A3BCCA852D07AADC00F2FDDF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A3BCCA882D07AB3200F2FDDF /* Streams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Streams.swift; sourceTree = "<group>"; };
@@ -52,6 +49,7 @@
 		A3BCCA962D07E3F000F2FDDF /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		A3BCCA982D07E80E00F2FDDF /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		A3BCCAA02D08047500F2FDDF /* TwitchNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchNetworkManager.swift; sourceTree = "<group>"; };
+		A3BCCAA22D08547200F2FDDF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A3EE192D2CFBBBC200DE3544 /* StreamCity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StreamCity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3EE19302CFBBBC200DE3544 /* StreamCityApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamCityApp.swift; sourceTree = "<group>"; };
 		A3EE19322CFBBBC200DE3544 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -111,8 +109,6 @@
 				A3BCCA712D079B3600F2FDDF /* SignUpView.swift */,
 				A3BCCA732D079B5A00F2FDDF /* LoginView.swift */,
 				A3BCCA752D079BFD00F2FDDF /* MainView.swift */,
-				A3BCCA792D07A37600F2FDDF /* AccountLinkingView.swift */,
-				A3BCCA7B2D07A3B200F2FDDF /* OAuthHandler.swift */,
 				A3BCCA832D07AA7100F2FDDF /* MainTabView.swift */,
 				A3BCCA852D07AADC00F2FDDF /* HomeView.swift */,
 				A3BCCA8A2D07AB6B00F2FDDF /* SearchView.swift */,
@@ -123,6 +119,7 @@
 				A3BCCA962D07E3F000F2FDDF /* ProfileEditView.swift */,
 				A3BCCA982D07E80E00F2FDDF /* PhotoPicker.swift */,
 				A3BCCAA02D08047500F2FDDF /* TwitchNetworkManager.swift */,
+				A3BCCAA22D08547200F2FDDF /* SettingsView.swift */,
 			);
 			path = StreamCity;
 			sourceTree = "<group>";
@@ -216,10 +213,10 @@
 				A3BCCA972D07E3F000F2FDDF /* ProfileEditView.swift in Sources */,
 				A3BCCA912D07ABDA00F2FDDF /* CommunityView.swift in Sources */,
 				A3BCCA992D07E80E00F2FDDF /* PhotoPicker.swift in Sources */,
+				A3BCCAA32D08547300F2FDDF /* SettingsView.swift in Sources */,
 				A3BCCA862D07AADC00F2FDDF /* HomeView.swift in Sources */,
 				A3EE19332CFBBBC200DE3544 /* ContentView.swift in Sources */,
 				A3BCCA722D079B3600F2FDDF /* SignUpView.swift in Sources */,
-				A3BCCA7C2D07A3B200F2FDDF /* OAuthHandler.swift in Sources */,
 				A3BCCA842D07AA7100F2FDDF /* MainTabView.swift in Sources */,
 				A3BCCA8D2D07AB8C00F2FDDF /* SearchBar.swift in Sources */,
 				A3BCCA932D07ABEC00F2FDDF /* Posts.swift in Sources */,
@@ -229,7 +226,6 @@
 				A3EE19312CFBBBC200DE3544 /* StreamCityApp.swift in Sources */,
 				A3BCCA8F2D07ABB400F2FDDF /* StreamDetailView.swift in Sources */,
 				A3BCCAA12D08047500F2FDDF /* TwitchNetworkManager.swift in Sources */,
-				A3BCCA7A2D07A37600F2FDDF /* AccountLinkingView.swift in Sources */,
 				A3BCCA892D07AB3200F2FDDF /* Streams.swift in Sources */,
 				A3BCCA8B2D07AB6B00F2FDDF /* SearchView.swift in Sources */,
 			);
