@@ -110,7 +110,7 @@ Progress Update 1:
 
 Progress Update 2:
 
-<img style="max-width:300px;" src="">
+<img style="max-width:300px;" src="StreamCity/Progress Update2.gif">
 
 GIF(s) created with VEED.io
 
