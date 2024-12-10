@@ -93,8 +93,8 @@ Settings Screen → Accessible from any tab, allowing users to manage their acco
 
 ## Progress Updates:
 
-My video Walkthrough(s):
+Progress Update 1:
 
-<img style="max-width:300px;" src="">
+<img style="max-width:300px;" src="StreamCity/Progress Update1.gif">
 
 GIF(s) created with VEED.io
