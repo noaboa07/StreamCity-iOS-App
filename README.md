@@ -119,4 +119,5 @@ Final Update 3:
 
 GIF(s) created with VEED.io
 
-
+**Noah Russell** | Master of Science in AI (May 2026)
+[LinkedIn](https://www.linkedin.com/in/noah-russell-61103128a/) | [Email](mailto:noahrussell2004@gmail.com)
